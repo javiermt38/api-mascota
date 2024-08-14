@@ -1,21 +1,28 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config(); // Asegúrate de que esta línea esté al inicio
+require('dotenv').config(); // Ensure correct spelling
 
 const app = express();
 
-const port = process.env.PORT || 9000; // Utiliza el puerto definido en .env o el valor por defecto 9000
+// variable de ambient para el hosting
+const port = process.env.PORT || 9000;
+
+//ruta de API
+const mascotaRouter=require("./router/mascotas");
+
+//middleware api
+app.use("/api",mascotaRouter);
 
 app.get('/', (req, res) => {
   res.send("Bienvenido a nuestra API con Node");
 });
 
-// Conexión a MongoDB con manejo de errores
+// Mongoose Connection with potential error checking:
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Conectado a MongoDB"))
-  .catch(err => console.error("Error al conectar a MongoDB:", err));
+  .catch((error) => console.error("Error al conectar a MongoDB:", error));
 
 app.listen(port, () => {
-  console.log(`API con Node y Express, escuchando en el puerto: ${port}`);
+  console.log(`API con Node y Express, Escuchando en el puerto: ${port}`);
 });
