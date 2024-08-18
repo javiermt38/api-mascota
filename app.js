@@ -11,6 +11,7 @@ const port = process.env.PORT || 9000;
 const mascotaRouter=require("./router/mascotas");
 
 //middleware api
+app.use(express.json());    
 app.use("/api",mascotaRouter);
 
 app.get('/', (req, res) => {
