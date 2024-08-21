@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/api",mascotaRouter);
 
 app.get('/', (req, res) => {
-  res.send("Bienvenido a nuestra API con Node");
+  res.send("Bienvenido a nuestra API con Node.js");
 });
 
 // Mongoose Connection with potential error checking:
